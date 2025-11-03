@@ -1,6 +1,7 @@
 import flet as ft
 from UI.alert import AlertManager
 
+
 '''
     VIEW:
     - Rappresenta l'interfaccia utente
@@ -64,6 +65,12 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
+        pulsante_mostra_auto = ft.ElevatedButton("Mostra", on_click=self.controller.mostra_auto)
+        pulsante_cerca_auto = ft.ElevatedButton("Cerca", on_click=self.controller.cerca_auto)
+        self.contenitore_lista_auto = ft.Container(visible=False, expand=True,content=self.lista_auto,height=250)
+        #creo 2 contenitori scrollabili e inserirsco le liste interessate
+        self.contenitore_lista_ricerca = ft.Container(visible=False,expand=True, content=self.lista_auto_ricerca,height=250  )
+
 
         # --- LAYOUT ---
         self.page.add(
@@ -83,9 +90,25 @@ class View:
 
             # Sezione 3
             # TODO
+            ft.Row(spacing=200,
+                   controls=[ft.Text("Automobili", size=20),pulsante_mostra_auto],
+                   alignment=ft.MainAxisAlignment.START),
+            self.contenitore_lista_auto,
+
+            ft.Divider(),
+
+
+
 
             # Sezione 4
             # TODO
+            ft.Text("Cerca Automobile",size=20),
+            ft.Row(spacing=50,
+                   controls=[self.input_modello_auto , pulsante_cerca_auto],
+                   alignment=ft.MainAxisAlignment.START),
+            self.contenitore_lista_ricerca,
+
+
         )
 
     def cambia_tema(self, e):
